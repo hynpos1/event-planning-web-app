@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marikina Moments | Boutique Event Planning</title>
+    
+    <!-- Google Fonts: Playfair Display & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: "#0F172A",     
+                            gold: "#C9A66B",     
+                            rose: "#E8C5C8",     
+                            pearl: "#FDFBF7",    
+                            charcoal: "#334155", 
+                            slate: "#64748B",    
+                        },
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+                        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    },
+                    letterSpacing: {
+                        editorial: '0.15em',  
+                    },
+                    boxShadow: {
+                        soft: '0 4px 20px -2px rgba(15, 23, 42, 0.05)',
+                        elevated: '0 10px 30px -4px rgba(15, 23, 42, 0.08)',
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Smooth scrolling for anchor links */
+        html { scroll-behavior: smooth; }
+        
+        /* Modal fade-in animation */
+        .modal-enter { opacity: 0; transform: scale(0.95); transition: all 0.3s ease-out; }
+        .modal-enter-active { opacity: 1; transform: scale(1); }
+        
+        /* Overlay fade-in */
+        .overlay-enter { opacity: 0; transition: opacity 0.3s ease-out; }
+        .overlay-enter-active { opacity: 1; }
+    </style>
+</head>
+
+<body class="bg-brand-pearl text-brand-charcoal font-sans antialiased overflow-x-hidden">
+
+    <!-- Sticky Navigation -->
+    <nav class="fixed w-full z-50 bg-brand-pearl/90 backdrop-blur-md border-b border-gray-200 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <span class="font-serif text-2xl font-bold text-brand-navy tracking-wide">Marikina<span class="text-brand-gold">Moments</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#" class="text-sm font-medium text-brand-charcoal hover:text-brand-gold transition-colors">Home</a>
+                    <a href="#portfolios" class="text-sm font-medium text-brand-charcoal hover:text-brand-gold transition-colors">Portfolios</a>
+                    <a href="#packages" class="text-sm font-medium text-brand-charcoal hover:text-brand-gold transition-colors">Packages</a>
+                    <a href="#about" class="text-sm font-medium text-brand-charcoal hover:text-brand-gold transition-colors">About Us</a>
+                    <a href="#contact" class="text-sm font-medium text-brand-charcoal hover:text-brand-gold transition-colors">Contact</a>
+                    <button onclick="openModal('General Inquiry')" class="bg-brand-navy text-white text-xs px-5 py-2 uppercase tracking-editorial hover:bg-brand-gold transition-colors duration-300">
+                        Inquire Now
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-brand-navy focus:outline-none">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-elevated">
+            <div class="px-4 pt-2 pb-6 space-y-1 flex flex-col">
+                <a href="#" class="block px-3 py-3 text-base font-medium text-brand-charcoal hover:bg-brand-pearl hover:text-brand-gold">Home</a>
+                <a href="#portfolios" class="block px-3 py-3 text-base font-medium text-brand-charcoal hover:bg-brand-pearl hover:text-brand-gold">Portfolios</a>
+                <a href="#packages" class="block px-3 py-3 text-base font-medium text-brand-charcoal hover:bg-brand-pearl hover:text-brand-gold">Packages</a>
+                <a href="#about" class="block px-3 py-3 text-base font-medium text-brand-charcoal hover:bg-brand-pearl hover:text-brand-gold">About Us</a>
+                <a href="#contact" class="block px-3 py-3 text-base font-medium text-brand-charcoal hover:bg-brand-pearl hover:text-brand-gold">Contact</a>
+                <button onclick="openModal('General Inquiry')" class="w-full mt-4 bg-brand-navy text-white text-sm px-5 py-3 uppercase tracking-editorial hover:bg-brand-gold transition-colors duration-300">
+                    Inquire Now
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative w-full min-h-[90vh] flex items-center justify-center pt-20">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80&w=1920" 
+                 alt="Elegant outdoor wedding reception" 
+                 class="w-full h-full object-cover object-center" />
+            <div class="absolute inset-0 bg-brand-navy/60"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <span class="block text-brand-rose text-sm md:text-base font-semibold uppercase tracking-editorial mb-4">
+                Boutique Event Planning
+            </span>
+            <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl text-white font-bold mb-6 leading-tight">
+                Crafting Unforgettable Memories in the Heart of Marikina.
+            </h1>
+            <p class="text-brand-pearl/90 text-lg md:text-xl font-light mb-10 max-w-2xl mx-auto leading-relaxed">
+                Boutique event planning tailored to your unique story, delivering flawless execution, breathtaking design, and a touch of local charm.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <button onclick="document.getElementById('packages').scrollIntoView()" class="w-full sm:w-auto bg-brand-gold text-brand-navy font-semibold px-8 py-4 uppercase tracking-editorial text-sm transition-all duration-300 hover:-translate-y-1 hover:brightness-110 hover:shadow-lg">
+                    View Our Packages
+                </button>
+                <a href="#portfolios" class="w-full sm:w-auto text-center border border-white/50 text-white px-8 py-4 uppercase tracking-editorial text-sm transition-all duration-300 hover:bg-white hover:text-brand-navy">
+                    Explore Portfolios
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Featured Event Types Section -->
+    <section id="portfolios" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="font-serif text-3xl md:text-4xl text-brand-navy font-bold mb-4">Curated Experiences</h2>
+                <div class="border-t border-brand-gold w-24 mx-auto my-6"></div>
+                <p class="text-brand-slate text-lg">We specialize in turning your milestones into masterfully designed, seamlessly executed celebrations.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Event Card 1 -->
+                <div class="group flex flex-col bg-brand-pearl border border-gray-100 shadow-sm transition-shadow duration-300 hover:shadow-xl">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=800" 
+                             alt="Bespoke Weddings" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                    </div>
+                    <div class="p-8 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-serif text-2xl text-brand-navy font-bold mb-3">Bespoke Weddings</h3>
+                            <p class="text-brand-charcoal leading-relaxed font-light mb-6">From intimate garden ceremonies to grand ballroom receptions, we design love stories that reflect your unique journey.</p>
+                        </div>
+                        <a href="#" class="text-brand-gold font-medium text-sm tracking-wider uppercase hover:text-brand-navy transition-colors inline-flex items-center">
+                            Learn More 
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Event Card 2 -->
+                <div class="group flex flex-col bg-brand-pearl border border-gray-100 shadow-sm transition-shadow duration-300 hover:shadow-xl">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1505369711674-722144d18ec8?auto=format&fit=crop&q=80&w=800" 
+                             alt="Corporate Galas" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                    </div>
+                    <div class="p-8 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-serif text-2xl text-brand-navy font-bold mb-3">Corporate Galas & Summits</h3>
+                            <p class="text-brand-charcoal leading-relaxed font-light mb-6">Professional, polished, and impactful events that elevate your brand and leave a lasting impression on your stakeholders.</p>
+                        </div>
+                        <a href="#" class="text-brand-gold font-medium text-sm tracking-wider uppercase hover:text-brand-navy transition-colors inline-flex items-center">
+                            Learn More
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Event Card 3 -->
+                <div class="group flex flex-col bg-brand-pearl border border-gray-100 shadow-sm transition-shadow duration-300 hover:shadow-xl">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1530103862676-de3c9a728795?auto=format&fit=crop&q=80&w=800" 
+                             alt="Milestone Celebrations" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                    </div>
+                    <div class="p-8 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-serif text-2xl text-brand-navy font-bold mb-3">Milestone Celebrations</h3>
+                            <p class="text-brand-charcoal leading-relaxed font-light mb-6">Birthdays, debuts, and anniversaries planned to perfection so you can focus on celebrating with the people who matter most.</p>
+                        </div>
+                        <a href="#" class="text-brand-gold font-medium text-sm tracking-wider uppercase hover:text-brand-navy transition-colors inline-flex items-center">
+                            Learn More
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Packages Section -->
+    <section id="packages" class="py-24 bg-brand-pearl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+                <div class="max-w-2xl">
+                    <h2 class="font-serif text-3xl md:text-4xl text-brand-navy font-bold mb-4">Our Signature Packages</h2>
+                    <div class="border-t border-brand-gold w-24 my-6"></div>
+                    <p class="text-brand-slate text-lg">Transparent pricing and comprehensive services tailored to your specific needs, whether you need full guidance or just a little help on the big day.</p>
+                </div>
+                <div class="mt-8 md:mt-0">
+                    <a href="#" class="text-brand-navy font-semibold text-sm uppercase tracking-editorial border-b-2 border-brand-gold pb-1 hover:text-brand-gold transition-colors">View All Packages</a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Package 1 -->
+                <div class="bg-white p-8 md:p-12 border border-gray-100 shadow-soft hover:shadow-elevated transition-shadow duration-300 relative overflow-hidden flex flex-col justify-between">
+                    <div class="absolute top-0 right-0 bg-brand-navy text-white text-xs px-4 py-2 uppercase tracking-widest">
+                        Most Popular
+                    </div>
+                    <div>
+                        <span class="inline-block bg-brand-rose/30 text-brand-navy text-xs px-3 py-1 uppercase tracking-wider font-medium mb-4">Full-Service Planning & Design</span>
+                        <h3 class="font-serif text-3xl text-brand-navy font-bold mb-2">The Grand Marikina Signature</h3>
+                        <p class="text-brand-slate font-light text-lg mb-8">Starts at ₱150,000</p>
+                        
+                        <ul class="space-y-4 mb-10 text-brand-charcoal font-light">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-brand-gold mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                End-to-end event design and conceptualization
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-brand-gold mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Unlimited consultations and venue visits
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-brand-gold mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Full vendor sourcing, negotiation, and coordination
+                            </li>
+                        </ul>
+                    </div>
+                    <button onclick="openModal('The Grand Marikina Signature')" class="w-full border border-brand-navy text-brand-navy py-4 uppercase tracking-editorial text-sm font-semibold transition-all duration-300 hover:bg-brand-navy hover:text-white">
+                        Secure This Package
+                    </button>
+                </div>
+
+                <!-- Package 2 -->
+                <div class="bg-white p-8 md:p-12 border border-gray-100 shadow-soft hover:shadow-elevated transition-shadow duration-300 flex flex-col justify-between">
+                    <div>
+                        <span class="inline-block bg-gray-100 text-brand-charcoal text-xs px-3 py-1 uppercase tracking-wider font-medium mb-4">Partial Planning & Coordination</span>
+                        <h3 class="font-serif text-3xl text-brand-navy font-bold mb-2">The Riverbanks Soiree</h3>
+                        <p class="text-brand-slate font-light text-lg mb-8">Starts at ₱75,000</p>
+                        
+                        <ul class="space-y-4 mb-10 text-brand-charcoal font-light">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-brand-gold mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Refinement of existing event concept
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-brand-gold mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Sourcing for up to 3 remaining key vendors
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-brand-gold mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Detailed timeline creation and distribution
+                            </li>
+                        </ul>
+                    </div>
+                    <button onclick="openModal('The Riverbanks Soiree')" class="w-full border border-brand-navy text-brand-navy py-4 uppercase tracking-editorial text-sm font-semibold transition-all duration-300 hover:bg-brand-navy hover:text-white">
+                        Secure This Package
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="contact" class="bg-brand-navy text-white pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <!-- Branding -->
+                <div class="lg:col-span-1">
+                    <span class="font-serif text-3xl font-bold tracking-wide block mb-4">Marikina<span class="text-brand-gold">Moments</span></span>
+                    <p class="text-brand-slate text-sm font-light leading-relaxed mb-6">
+                        Bringing sophisticated design and flawless execution to the Shoe Capital's most celebrated occasions.
+                    </p>
+                    <div class="flex space-x-4">
+                        <!-- Placeholder Social Icons -->
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-gold hover:text-brand-navy transition-colors">
+                            <span class="sr-only">Facebook</span>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-gold hover:text-brand-navy transition-colors">
+                            <span class="sr-only">Instagram</span>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div>
+                    <h4 class="font-serif text-lg font-semibold mb-6">Explore</h4>
+                    <ul class="space-y-3 font-light text-brand-slate text-sm">
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Home</a></li>
+                        <li><a href="#portfolios" class="hover:text-brand-gold transition-colors">Portfolios</a></li>
+                        <li><a href="#packages" class="hover:text-brand-gold transition-colors">Packages & Pricing</a></li>
+                        <li><a href="#about" class="hover:text-brand-gold transition-colors">About the Team</a></li>
+                        <li><a href="#contact" class="hover:text-brand-gold transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="lg:col-span-2">
+                    <h4 class="font-serif text-lg font-semibold mb-6">Get in Touch</h4>
+                    <ul class="space-y-4 font-light text-brand-slate text-sm">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 mr-3 text-brand-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <span>14 Shoe Avenue, Barangay San Roque,<br>Marikina City, Metro Manila 1801</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 mr-3 text-brand-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <a href="mailto:hello@marikinamoments.com" class="hover:text-white transition-colors">hello@marikinamoments.com</a>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 mr-3 text-brand-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            <a href="tel:+63281234567" class="hover:text-white transition-colors">+63 2 8123 4567</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-brand-slate font-light">
+                <p>&copy; <span id="current-year"></span> Marikina Moments. All rights reserved.</p>
+                <div class="mt-4 md:mt-0 space-x-4">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Booking Modal Overlay -->
+    <div id="booking-modal" class="fixed inset-0 z-[60] flex items-center justify-center hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Background Overlay -->
+        <div id="modal-overlay" class="absolute inset-0 bg-brand-navy/80 backdrop-blur-sm opacity-0 transition-opacity duration-300" onclick="closeModal()"></div>
+        
+        <!-- Modal Content Box -->
+        <div id="modal-content" class="relative bg-white w-full max-w-xl mx-4 shadow-elevated transform scale-95 opacity-0 transition-all duration-300 max-h-[90vh] overflow-y-auto flex flex-col">
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-brand-slate hover:text-brand-navy focus:outline-none z-10 bg-white rounded-full p-1">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            
+            <!-- Form Container -->
+            <div id="form-container" class="p-8 sm:p-10">
+                <div class="text-center mb-8">
+                    <span class="text-brand-rose text-xs uppercase tracking-editorial font-semibold">Start Planning</span>
+                    <h2 class="text-2xl font-serif font-bold text-brand-navy mt-2 mb-2" id="modal-title">Book Package</h2>
+                    <p class="text-sm text-brand-slate">Fill out the details below and we will contact you to confirm dates.</p>
+                </div>
+
+                <form id="booking-form" class="space-y-5">
+                    <input type="hidden" id="selected-package" name="package">
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label for="first-name" class="block text-xs font-medium text-brand-charcoal uppercase tracking-wider mb-1">First Name *</label>
+                            <input type="text" id="first-name" required class="w-full border-b border-gray-300 px-0 py-2 text-sm focus:outline-none focus:border-brand-gold bg-transparent transition-colors">
+                        </div>
+                        <div>
+                            <label for="last-name" class="block text-xs font-medium text-brand-charcoal uppercase tracking-wider mb-1">Last Name *</label>
+                            <input type="text" id="last-name" required class="w-full border-b border-gray-300 px-0 py-2 text-sm focus:outline-none focus:border-brand-gold bg-transparent transition-colors">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label for="email" class="block text-xs font-medium text-brand-charcoal uppercase tracking-wider mb-1">Email Address *</label>
+                            <input type="email" id="email" required class="w-full border-b border-gray-300 px-0 py-2 text-sm focus:outline-none focus:border-brand-gold bg-transparent transition-colors">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-xs font-medium text-brand-charcoal uppercase tracking-wider mb-1">Phone Number *</label>
+                            <input type="tel" id="phone" required class="w-full border-b border-gray-300 px-0 py-2 text-sm focus:outline-none focus:border-brand-gold bg-transparent transition-colors">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label for="event-date" class="block text-xs font-medium text-brand-charcoal uppercase tracking-wider mb-1">Estimated Date</label>
+                            <input type="date" id="event-date" class="w-full border-b border-gray-300 px-0 py-2 text-sm text-brand-charcoal focus:outline-none focus:border-brand-gold bg-transparent transition-colors">
+                        </div>
+                        <div>
+                            <label for="guest-count" class="block text-xs font-medium text-brand-charcoal uppercase tracking-wider mb-1">Est. Guest Count</label>
+                            <select id="guest-count" class="w-full border-b border-gray-300 px-0 py-2 text-sm text-brand-charcoal focus:outline-none focus:border-brand-gold bg-transparent transition-colors">
+                                <option value="intimate">Intimate (Under 50)</option>
+                                <option value="medium">Medium (50 - 150)</option>
+                                <option value="large">Grand (150+)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Required GCash Payment Notice -->
+                    <div class="mt-8 bg-brand-pearl border border-brand-gold/50 p-5">
+                        <div class="flex items-center mb-2">
+                            <!-- Custom minimal GCash inspired SVG icon -->
+                            <svg class="w-5 h-5 text-blue-600 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H8v4H6v-6h5v6h-1zm4 0v-4h-3v4h-2v-6h5v6h-1zm-1-8V7h-2v2h2zm-4 0V7H8v2h2z"/>
+                            </svg>
+                            <h4 class="font-bold text-sm text-brand-navy">Initial Deposit Requirement</h4>
+                        </div>
+                        <p class="text-xs text-brand-charcoal leading-relaxed">
+                            To secure your consultation and lock in our calendar dates, an initial refundable deposit of <strong>₱5,000</strong> is required. 
+                            <br><br>We exclusively process deposits via <strong>GCash</strong> for immediate verification. Our payment details will be sent to your email upon form submission.
+                        </p>
+                    </div>
+
+                    <div class="pt-4">
+                        <button type="submit" class="w-full bg-brand-gold text-brand-navy font-semibold px-8 py-4 uppercase tracking-editorial text-sm transition-all duration-300 hover:brightness-110 hover:shadow-lg">
+                            Submit Request & View Payment Details
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Success Message Container (Hidden by default) -->
+            <div id="success-container" class="hidden p-8 sm:p-12 text-center flex-col items-center justify-center h-full min-h-[400px]">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 text-green-600">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <h2 class="text-3xl font-serif font-bold text-brand-navy mb-4">Request Received</h2>
+                <p class="text-brand-slate mb-8 leading-relaxed">
+                    Thank you for choosing Marikina Moments. We have sent an email with our GCash QR code and payment instructions to secure your date. Our lead planner will be in touch shortly.
+                </p>
+                <button onclick="closeModal()" class="border border-brand-navy text-brand-navy px-8 py-3 uppercase tracking-editorial text-sm font-semibold transition-all duration-300 hover:bg-brand-navy hover:text-white">
+                    Close Window
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Set dynamic year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-md');
+            } else {
+                navbar.classList.remove('shadow-md');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        const mobileLinks = mobileMenu.querySelectorAll('a, button');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Modal Logic
+        const modal = document.getElementById('booking-modal');
+        const overlay = document.getElementById('modal-overlay');
+        const content = document.getElementById('modal-content');
+        const formContainer = document.getElementById('form-container');
+        const successContainer = document.getElementById('success-container');
+        const modalTitle = document.getElementById('modal-title');
+        const packageInput = document.getElementById('selected-package');
+        const form = document.getElementById('booking-form');
+
+        function openModal(packageName) {
+            // Reset form state
+            form.reset();
+            formContainer.classList.remove('hidden');
+            successContainer.classList.add('hidden');
+            successContainer.classList.remove('flex');
+
+            // Set Data
+            modalTitle.textContent = packageName === 'General Inquiry' ? 'General Inquiry' : `Book: ${packageName}`;
+            packageInput.value = packageName;
+
+            // Show Modal (remove hidden, trigger reflow, then add animation classes)
+            modal.classList.remove('hidden');
+            // small delay to ensure display:block applies before opacity transition
+            setTimeout(() => {
+                overlay.classList.add('opacity-100');
+                overlay.classList.remove('opacity-0');
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+            
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            // Reverse animations
+            overlay.classList.remove('opacity-100');
+            overlay.classList.add('opacity-0');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+
+            // Wait for transition before hiding completely
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // Close on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+        // Form Submission Logic
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simple validation check (html5 required tags handle most of it)
+            if (form.checkValidity()) {
+                // Simulate an API call / loading state if necessary
+                const btn = form.querySelector('button[type="submit"]');
+                const originalText = btn.textContent;
+                btn.textContent = 'Processing...';
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    // Show success screen inside modal
+                    formContainer.classList.add('hidden');
+                    successContainer.classList.remove('hidden');
+                    successContainer.classList.add('flex');
+                    
+                    // Reset button for future opens
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                }, 800); // simulate 800ms network request
+            }
+        });
+
+    </script>
+</body>
+</html>
